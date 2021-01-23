@@ -7,14 +7,14 @@
 
     <div class="form-group mt-3">
         <label for="email-login" class="mb-0"><i class="fa fa-envelope mr-1"></i>Email:</label>
-        <valid-field [form]="formLogin" field="email">
+        <valid-field [form]="formLogin" field="email" idField="email-login">
             <input type="email" id="email-login" formControlName="email" class="form-control" placeholder="digite seu email">
         </valid-field>
     </div>
 
     <div class="form-group mt-2">
         <label for="password-login" class="mb-0"><i class="fa fa-key mr-1"></i>Senha:</label>
-        <valid-field [form]="formLogin" field="password">
+        <valid-field [form]="formLogin" field="password" idField="password-login">
             <input type="password" id="password-login" formControlName="password" class="form-control" placeholder="digite sua senha">
         </valid-field>
     </div>

@@ -2,6 +2,7 @@ import { CommonModule } from "@angular/common";
 import { HttpClientModule } from "@angular/common/http";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { ValidFieldModule } from "src/app/shared/components/valid-field/valid-field.module";
 import { RegisterComponent } from "./register.component";
 import { RegisterService } from "./register.service";
 
@@ -12,7 +13,8 @@ import { RegisterService } from "./register.service";
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
-        HttpClientModule
+        HttpClientModule,
+        ValidFieldModule
     ],
     providers: [
         RegisterService

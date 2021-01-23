@@ -9,10 +9,11 @@ export class ValidFieldComponent{
     
     @Input() form:FormGroup;
     @Input() field: string;
+    @Input() idField: string;
 
     checkField(): boolean{
         let check = this.form.get(this.field).errors && this.form.get(this.field).touched;
-        let input  = document.querySelector(`[formControlName=${this.field}]`);
+        let input  = document.querySelector(`#${this.idField}`);
         if(check){
             input.classList.add('is-invalid');
         }else{
