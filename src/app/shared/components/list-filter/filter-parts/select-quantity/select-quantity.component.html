@@ -1,0 +1,8 @@
+<form class="form-inline">
+    <label for="qtd" class="mr-2 d-none d-md-block">Exibir: </label>
+    <select id="qtd" class="form-control form-control-sm" (change)="onChange($event.target.value)">
+        <ng-container *ngFor="let option of options">
+            <option [value]="option">{{option}}</option>
+        </ng-container>
+    </select>
+</form>

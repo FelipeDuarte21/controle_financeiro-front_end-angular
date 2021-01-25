@@ -1,0 +1,19 @@
+<div class="mt-5">              
+    <div class="row justify-content-between">
+        
+        <div class="col-12 col-md-4">
+            <search-by-name (eventSearch)="onEventSearch($event)"></search-by-name>
+        </div>  
+      
+        <div class="col-12 col-md-4 mt-3 mt-md-0 text-center">
+            <pagination [totalPages]="totalPages" [currentPage]="currentPage" 
+                (eventPage)="onEventPage($event)"></pagination>
+        </div>
+        
+        <div class="col-12 col-md-4 mt-3 mt-md-0">
+            <select-quantity [options]="options" class="float-md-right" 
+                (eventSelectQuantity)="onEventSelectQuantity($event)"></select-quantity>
+        </div>
+        
+    </div>
+</div>

@@ -24,8 +24,6 @@ export class AuthService{
 
         let user = JSON.parse(objToken.sub) as UserToken;
 
-        console.log(user);
-
         this.userSubject.next(user);
     }
 

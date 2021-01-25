@@ -1,0 +1,29 @@
+<div class="my-5">
+
+    <ng-container *ngFor="let btn of buttons">
+
+        <ng-container *ngIf="btn.visible == true">
+            <button type="button" class="btn mr-1" [class]="btn.btnClas" (click)="onEventClick(btn.id)">
+                <i class="fa mr-1" [class]="btn.iconClass"></i>{{btn.btnName}}
+            </button>
+        </ng-container>
+
+        <ng-container *ngIf="btn.visible == false">
+
+            <ng-container *ngIf="btn.nature == 0">
+                <button type="button" class="btn mr-1" [ngClass]="{'d-none': !showSingle}" [class]="btn.btnClas" (click)="onEventClick(btn.id)">
+                    <i class="fa mr-1" [class]="btn.iconClass"></i>{{btn.btnName}}
+                </button>
+            </ng-container>
+
+            <ng-container *ngIf="btn.nature == 1">
+                <button type="button" class="btn mr-1" [ngClass]="{'d-none': !showMultiple}" [class]="btn.btnClas" (click)="onEventClick(btn.id)">
+                    <i class="fa mr-1" [class]="btn.iconClass"></i>{{btn.btnName}}
+                </button>
+            </ng-container>
+
+        </ng-container>
+
+    </ng-container>
+
+</div>

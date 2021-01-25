@@ -1,0 +1,5 @@
+<form [formGroup]="formSearch" (submit)="send()" class="form-inline">
+    <input type="text" class="form-control form-control-sm mr-1" formControlName="name" 
+        placeholder="pesquisar por nome" (keyup)="onEventSearch($event.target.value)">
+    <button type="submit" class="btn btn-outline-primary btn-sm d-none d-lg-block"><i class="fa fa-search"></i>Buscar</button>
+</form>

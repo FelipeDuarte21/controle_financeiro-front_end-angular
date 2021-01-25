@@ -1,0 +1,11 @@
+.card{
+    cursor: pointer;
+}
+
+.card-border{
+    border-top: 4px solid  #17a2b8;
+}
+
+.card-selected{
+    border: 2px solid #007bff;
+}

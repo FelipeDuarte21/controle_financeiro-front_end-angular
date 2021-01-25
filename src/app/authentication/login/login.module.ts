@@ -3,6 +3,7 @@ import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
 import { ValidFieldModule } from "src/app/shared/components/valid-field/valid-field.module";
+import { LoginGuardService } from "./login-guard.service";
 import { LoginComponent } from "./login.component";
 import { LoginService } from "./login.service";
 
@@ -17,7 +18,8 @@ import { LoginService } from "./login.service";
         ValidFieldModule
     ],
     providers: [
-        LoginService
+        LoginService,
+        LoginGuardService
     ]
 })
 export class LoginModule{

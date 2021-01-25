@@ -1,7 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { RouterModule } from "@angular/router";
-import { ValidFieldModule } from "../shared/components/valid-field/valid-field.module";
 import { AuthService } from "./auth/auth.service";
 import { TokenService } from "./auth/token.service";
 import { AuthenticationRoutingModule } from "./authentication-routing.module";
