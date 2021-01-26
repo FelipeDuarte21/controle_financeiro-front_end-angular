@@ -17,9 +17,9 @@
                     <!--Formulário-->
                     <form [formGroup]="formSave" (submit)="send()">
 
-                        <div class="alert alert-danger text-center" *ngIf="showErro">{{messageErro}}</div>
+                        <div class="alert alert-danger text-center" *ngIf="showErro">{{message}}</div>
 
-                        <div class="alert alert-success text-center" *ngIf="showSuccess">{{messageSuccess}}</div>
+                        <div class="alert alert-success text-center" *ngIf="showSuccess">{{message}}</div>
 
                         <input type="hidden" name="id" value="" formControlName="id">
 

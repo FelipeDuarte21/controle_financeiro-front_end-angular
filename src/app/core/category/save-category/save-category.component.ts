@@ -15,10 +15,9 @@ export class SaveCategoryComponent implements OnInit{
     formSave: FormGroup;
 
     showErro:boolean = false;
-    messageErro: string = "";
-
     showSuccess:boolean = false;
-    messageSuccess: string = "";
+    message: string = "";
+
 
     private id: number;
 
@@ -83,13 +82,13 @@ export class SaveCategoryComponent implements OnInit{
                 resp => {
                     console.log(resp);
                     this.showSuccess = true;
-                    this.messageSuccess = "Categoria cadastra com sucesso!";
+                    this.message = "Categoria cadastra com sucesso!";
                     this.formSave.reset();
                 },
                 error => {
                     console.log(error);
                     this.showErro = true;
-                    this.messageErro = "Erro ao cadastrar categoria!";
+                    this.message = "Erro ao cadastrar categoria!";
                     this.formSave.reset();
                 }
             );
@@ -100,13 +99,13 @@ export class SaveCategoryComponent implements OnInit{
                 resp => { 
                     console.log(resp);
                     this.showSuccess = true;
-                    this.messageSuccess = "Categoria atualizada com sucesso!";
+                    this.message = "Categoria atualizada com sucesso!";
                     this.formSave.reset();
                 },
                 err => {
                     console.log(err);
                     this.showErro = true;
-                    this.messageErro = "Erro ao atualizar categoria!";
+                    this.message = "Erro ao atualizar categoria!";
                     this.formSave.reset();
                 }
             );

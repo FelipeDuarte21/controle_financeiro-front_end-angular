@@ -7,6 +7,7 @@ import { HeaderModule } from "src/app/shared/header/header.module";
 import { CategoryRoutingModule } from "./category-routing.module";
 import { CategoryComponent } from "./category.component";
 import { CategoryService } from "./category.service";
+import { DeleteCategoryModule } from "./delete-category/delete-category.module";
 import { HomeCategoryModule } from "./home-category/home-category.module";
 import { SaveCategoryModule } from "./save-category/save-category.module";
 
@@ -19,7 +20,8 @@ import { SaveCategoryModule } from "./save-category/save-category.module";
         HttpClientModule,
         HeaderModule,
         HomeCategoryModule,
-        SaveCategoryModule
+        SaveCategoryModule,
+        DeleteCategoryModule
     ],
     providers: [
         CategoryService,

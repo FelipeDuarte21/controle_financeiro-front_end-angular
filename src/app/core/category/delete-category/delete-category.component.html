@@ -1,0 +1,43 @@
+<div class="container-fluid">
+
+    <div class="row justify-content-center">
+
+        <div class="col-12 col-md-10">
+
+            <h4 class="text-center mt-5">Excluir Categorias</h4>
+
+            <div class="my-5 ml-3">
+                <a routerLink="" class="btn btn-info mr-1"><i class="fa fa-chevron-circle-left mr-1"></i>Voltar</a>
+            </div>
+
+            <div class="alert alert-success ml-3 text-center" *ngIf="showSuccess">{{message}}</div>
+
+            <div class="alert alert-danger ml-3 text-center" *ngIf="showErro">{{message}}</div>
+            
+            <div class="col-12 col-md-6 col-lg-4 col-xl-3 mt-2" *ngIf="category != null">
+                <div class="card card-border">
+                    <div class="card-body">
+                        <div class="row align-items-center">
+                            <div class="col-4 mr-2 aligm-item-center">
+                                <h1 class="text-secondary text-center vertical-aligm-center" style="font-size: 5rem;"><i class="fa fa-bank"></i></h1>
+                            </div>
+                            <div class="col-7">
+        
+                                <h6 class="mb-0 mt-1">Nome:</h6>
+                                <span>{{category?.name}}</span>
+        
+                                <h6 class="mb-0 mt-3">Descricao:</h6>
+                                <span class="d-block">{{category?.description}}</span>
+        
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-danger btn-block btn-sm mt-1" (click)="delete(category?.id)" ><i class="fa fa-trash mr-1"></i>Excluir</button>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

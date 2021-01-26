@@ -22,6 +22,10 @@ export class CategoryService{
         return this.http.put<Category>(`${this.route}`,category);
     }
 
+    delete(id:number): Observable<any>{
+        return this.http.delete(`${this.route}/${id}`);
+    }
+
     findById(id:number): Observable<Category>{
         return this.http.get<Category>(`${this.route}/${id}`);
     }

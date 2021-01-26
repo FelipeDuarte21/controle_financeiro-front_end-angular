@@ -24,7 +24,7 @@ export class HomeCategoryComponent implements OnInit{
             {id: 0,btnName: "Adicionar",btnClas: "btn-info",visible: true,nature: null,iconClass: "fa-plus"},
             {id: 1,btnName: "Visualizar Lançamentos",btnClas: "btn-info",visible: false,nature: ButtonBuilderNatureEnum.SINGLE,iconClass: "fa-eye"},
             {id: 2,btnName: "Alterar",btnClas: "btn-info",visible: false,nature: ButtonBuilderNatureEnum.SINGLE,iconClass: "fa-edit"},
-            {id: 3,btnName: "Excluir",btnClas: "btn-danger",visible: false,nature: ButtonBuilderNatureEnum.MULTIPLE,iconClass: "fa-trash"}
+            {id: 3,btnName: "Excluir",btnClas: "btn-danger",visible: false,nature: ButtonBuilderNatureEnum.SINGLE,iconClass: "fa-trash"}
         ];
     }
 
@@ -52,14 +52,21 @@ export class HomeCategoryComponent implements OnInit{
 
         switch(btn){
             case 0:
-                route = "category/save";
-                break;
             case 2:
-                route = `category/save/${this.ids[0]}`;
+                route = `category/save`;
                 break;
+            case 3:
+                route = 'category/delete'
         }
 
-        this.router.navigate([route]);
+        switch(btn){
+            case 2:
+            case 3:
+                this.router.navigate([route,this.ids[0]]);
+                break;
+            default:
+                this.router.navigate([route]);
+        }
 
     }
 
