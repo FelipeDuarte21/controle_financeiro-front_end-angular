@@ -1,92 +1,39 @@
-<list-filter [totalPages]="totalPages" [currentPage]="currentPages" [options]="options"
+<ng-container *ngIf="totalElements != 0">
+
+    <list-filter [totalPages]="totalPages" [currentPage]="currentPage" [options]="options"
     (eventPage)="onEventPage($event)" (eventSelectQuantity)="onEventSelectQuantity($event)"
     (eventSearch)="onEventSearch($event)"></list-filter>
 
-<!--Cards-->
-<div class="row my-4">
+    <!--Cards-->
+    <div class="row my-4" *ngIf="categories.length != 0">
 
-    <div class="col-12 col-md-6 col-lg-4 col-xl-3 mt-2" (click)="onEventClickCard(1)">
-        <div class="card card-border" id="card-1">
-            <div class="card-body">
-                <div class="row align-items-center">
-                    <div class="col-4 mr-2 aligm-item-center">
-                        <h1 class="text-secondary text-center vertical-aligm-center" style="font-size: 5rem;"><i class="fa fa-bank"></i></h1>
-                    </div>
-                    <div class="col-7">
-
-                        <h6 class="mb-0 mt-1">Nome:</h6>
-                        <span>Teste</span>
-
-                        <h6 class="mb-0 mt-3">Descricao:</h6>
-                        <span class="d-block">Categoria para teste</span>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-12 col-md-6 col-lg-4 col-xl-3 mt-2" (click)="onEventClickCard(2)">
-        <div class="card card-border" id="card-2">
-            <div class="card-body">
-                <div class="row align-items-center">
-                    <div class="col-4 mr-2 aligm-item-center">
-                        <h1 class="text-secondary text-center vertical-aligm-center" style="font-size: 5rem;"><i class="fa fa-bank"></i></h1>
-                    </div>
-                    <div class="col-7">
-
-                        <h6 class="mb-0 mt-1">Nome:</h6>
-                        <span>Teste</span>
-
-                        <h6 class="mb-0 mt-3">Descricao:</h6>
-                        <span class="d-block">Categoria para teste</span>
-
+        <ng-container *ngFor="let category of categories">
+            <div class="col-12 col-md-6 col-lg-4 col-xl-3 mt-2" (click)="onEventClickCard(category.id)">
+                <div class="card card-border" [id]="builderId(category.id)">
+                    <div class="card-body">
+                        <div class="row align-items-center">
+                            <div class="col-4 mr-2 aligm-item-center">
+                                <h1 class="text-secondary text-center vertical-aligm-center" style="font-size: 5rem;"><i class="fa fa-bank"></i></h1>
+                            </div>
+                            <div class="col-7">
+        
+                                <h6 class="mb-0 mt-1">Nome:</h6>
+                                <span>{{category.name}}</span>
+        
+                                <h6 class="mb-0 mt-3">Descricao:</h6>
+                                <span class="d-block">{{category.description}}</span>
+        
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </ng-container>
+
     </div>
 
-    <div class="col-12 col-md-6 col-lg-4 col-xl-3 mt-2" (click)="onEventClickCard(3)">
-        <div class="card card-border" id="card-3">
-            <div class="card-body">
-                <div class="row align-items-center">
-                    <div class="col-4 mr-2 aligm-item-center">
-                        <h1 class="text-secondary text-center vertical-aligm-center" style="font-size: 5rem;"><i class="fa fa-bank"></i></h1>
-                    </div>
-                    <div class="col-7">
+    <p class="text-center text-muted mt-5" *ngIf="categories.length == 0">Nenhuma categoria encontrada!</p>
 
-                        <h6 class="mb-0 mt-1">Nome:</h6>
-                        <span>Teste</span>
+</ng-container>
 
-                        <h6 class="mb-0 mt-3">Descricao:</h6>
-                        <span class="d-block">Categoria para teste</span>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-12 col-md-6 col-lg-4 col-xl-3 mt-2" (click)="onEventClickCard(4)">
-        <div class="card card-border" id="card-4">
-            <div class="card-body">
-                <div class="row align-items-center">
-                    <div class="col-4 mr-2 aligm-item-center">
-                        <h1 class="text-secondary text-center vertical-aligm-center" style="font-size: 5rem;"><i class="fa fa-bank"></i></h1>
-                    </div>
-                    <div class="col-7">
-
-                        <h6 class="mb-0 mt-1">Nome:</h6>
-                        <span>Teste</span>
-
-                        <h6 class="mb-0 mt-3">Descricao:</h6>
-                        <span class="d-block">Categoria para teste</span>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-</div>
+<p class="text-center text-muted mt-5" *ngIf="totalElements == 0">Nenhuma categoria cadastrada!</p>

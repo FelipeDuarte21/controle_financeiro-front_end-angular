@@ -1,14 +1,22 @@
-import { Component, EventEmitter, Output } from "@angular/core";
+import { Component, EventEmitter, OnInit, Output } from "@angular/core";
+import { Category } from "../../category.model";
+import { CategoryService } from "../../category.service";
 
 @Component({
     selector: 'list-category',
     templateUrl: './list-category.component.html',
     styleUrls: ['./list-category.component.css']
 })
-export class ListCategoryComponent{
+export class ListCategoryComponent implements OnInit{
 
-    currentPages: number = 0;
-    totalPages: number = 1;    
+    categories: Array<Category> =  [];
+    
+    currentPage: number = 0;
+    totalPages: number = 1;
+    size: number = 4;
+    totalElements: number = 0;    
+
+    private name: string = null;
 
     options: Array<string> = ['4','8','12'];
     
@@ -16,6 +24,35 @@ export class ListCategoryComponent{
 
     private countCardSelected:number = 0;
     private idsCardSelected: Array<number> = [];
+
+    constructor(
+        private categoryService: CategoryService
+    ){}
+
+    ngOnInit(): void {
+        this.findAll(this.currentPage,this.size);
+    }
+
+    private findAll(page:number,size:number){
+        this.categoryService.findAll(page,size).subscribe(
+            pageCategory => {
+                this.categories = pageCategory.content;
+                this.totalPages = pageCategory.totalPages;
+                this.currentPage = pageCategory.number;
+                this.totalElements = pageCategory.totalElements;
+            }
+        );
+    }
+
+    private findByName(name:string,page:number,size:number){
+        this.categoryService.findByName(name,page,size).subscribe(
+            pageCategory => {
+                this.categories = pageCategory.content;
+                this.totalPages = pageCategory.totalPages;
+                this.currentPage = pageCategory.number;
+            }
+        );
+    }
 
     onEventClickCard(id: number){
 
@@ -52,15 +89,31 @@ export class ListCategoryComponent{
     }
 
     onEventPage(page: number){
-        console.log(page)
+        this.currentState(page,this.size);
     }
 
     onEventSelectQuantity(quantity:number){
-        console.log(quantity);
+        this.size = quantity;
+        this.currentPage = 0;
+        this.currentState(this.currentPage,this.size);
     }
 
     onEventSearch(name: string){
-        console.log(name);
+        this.name = name;
+        if(this.name.length == 0) this.name == null;
+        this.currentState(0,this.size);
+    }
+
+    private currentState(page:number,size:number = 0){
+        if(!this.name){
+            this.findAll(page,size);
+        }else{
+            this.findByName(this.name,page,size);
+        }
+    }
+
+    builderId(id: number):string{
+        return `card-${id}`;
     }
 
 }

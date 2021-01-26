@@ -1,0 +1,60 @@
+<div class="container-fluid">
+
+    <div class="row justify-content-center">
+
+        <div class="col-12 col-md-10 mb-3">
+
+            <h4 class="text-center mt-5">{{title}} Categoria</h4>
+
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+
+                    <!--Botões-->
+                    <div class="my-5">
+                        <a routerLink="" class="btn btn-info"><i class="fa fa-chevron-circle-left mr-1"></i>Voltar</a>
+                    </div>
+
+                    <!--Formulário-->
+                    <form [formGroup]="formSave" (submit)="send()">
+
+                        <div class="alert alert-danger text-center" *ngIf="showErro">Categoria já adicionada!</div>
+
+                        <div class="alert alert-success text-center" *ngIf="showSuccess">Categoria adicionada com sucesso!</div>
+
+                        <input type="hidden" name="id" value="" formControlName="id">
+
+                        <div class="form-group">
+                            <label for="name-category" class="mb-0">Nome:</label>
+                            <valid-field [form]="formSave" field="name" idField="name-category">
+                                <input type="text" id="name-category" class="form-control" formControlName="name">
+                                <p class="text-muted float-right">{{getCaracteresField('name')}}/50</p>
+                            </valid-field>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="description-category" class="mb-0">Descrição:</label>
+                            <valid-field [form]="formSave" field="description" idField="description-category">
+                                <input type="text" id="description-category" class="form-control" formControlName="description">
+                                <p class="text-muted float-right">{{getCaracteresField('description')}}/150</p>
+                            </valid-field>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="observation-category" class="mb-0">Observações:</label>
+                            <valid-field [form]="formSave" field="observation" idField="observation-category">
+                                <textarea id="observation-category" class="form-control" rows="5" formControlName="observation"></textarea>
+                                <p class="text-muted float-right">{{getCaracteresField('observation')}}/255</p>
+                            </valid-field>
+                        </div>
+
+                        <button [disabled]="formSave.invalid" type="submit" class="btn btn-success mr-1"><i class="fa fa-save mr-1"></i>Salvar</button>
+
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

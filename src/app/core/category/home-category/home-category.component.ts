@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 import { ButtonBuilderModel, ButtonBuilderNatureEnum } from "src/app/shared/components/button-builder/button-builder.model";
 
 @Component({
@@ -11,6 +12,10 @@ export class HomeCategoryComponent implements OnInit{
 
     showSingle:boolean = false;
     showMultiple:boolean = false;
+
+    constructor(
+        private router: Router
+    ){}
    
     ngOnInit(): void {
         this.buttons = [
@@ -37,6 +42,19 @@ export class HomeCategoryComponent implements OnInit{
 
     onEventClickButton(id: number){
         console.log('botão: ' + id);
+        this.redirect(id);
+    }
+
+    private redirect(btn: number){
+        let route = "";
+
+        switch(btn){
+            case 0:
+                route = "category/save"
+        }
+
+        this.router.navigate([route]);
+
     }
 
 }
