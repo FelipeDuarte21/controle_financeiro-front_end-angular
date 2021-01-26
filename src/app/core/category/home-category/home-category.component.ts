@@ -13,6 +13,8 @@ export class HomeCategoryComponent implements OnInit{
     showSingle:boolean = false;
     showMultiple:boolean = false;
 
+    private ids:Array<number> = [];
+
     constructor(
         private router: Router
     ){}
@@ -27,6 +29,7 @@ export class HomeCategoryComponent implements OnInit{
     }
 
     onEventClickCard(value: any){
+        this.ids = value.ids;
         if(value.count == 0){
             this.showSingle = false;
             this.showMultiple = false;
@@ -41,16 +44,19 @@ export class HomeCategoryComponent implements OnInit{
     }
 
     onEventClickButton(id: number){
-        console.log('botão: ' + id);
         this.redirect(id);
     }
 
-    private redirect(btn: number){
+    private redirect(btn: number, ){
         let route = "";
 
         switch(btn){
             case 0:
-                route = "category/save"
+                route = "category/save";
+                break;
+            case 2:
+                route = `category/save/${this.ids[0]}`;
+                break;
         }
 
         this.router.navigate([route]);

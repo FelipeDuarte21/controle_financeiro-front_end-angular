@@ -17,9 +17,9 @@
                     <!--Formulário-->
                     <form [formGroup]="formSave" (submit)="send()">
 
-                        <div class="alert alert-danger text-center" *ngIf="showErro">Categoria já adicionada!</div>
+                        <div class="alert alert-danger text-center" *ngIf="showErro">{{messageErro}}</div>
 
-                        <div class="alert alert-success text-center" *ngIf="showSuccess">Categoria adicionada com sucesso!</div>
+                        <div class="alert alert-success text-center" *ngIf="showSuccess">{{messageSuccess}}</div>
 
                         <input type="hidden" name="id" value="" formControlName="id">
 

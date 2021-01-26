@@ -18,6 +18,14 @@ export class CategoryService{
         return this.http.post<Category>(this.route,category);
     }
 
+    update(category: Category): Observable<Category>{
+        return this.http.put<Category>(`${this.route}`,category);
+    }
+
+    findById(id:number): Observable<Category>{
+        return this.http.get<Category>(`${this.route}/${id}`);
+    }
+
     findByName(name:string,page:number,size:number):Observable<CategoryPage>{
         return this.http.get<CategoryPage>(`${this.route}/search?name=${name}&page=${page}&size=${size}`);
     }

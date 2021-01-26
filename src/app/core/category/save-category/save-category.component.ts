@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { ActivatedRoute, Route } from "@angular/router";
 import { Category } from "../category.model";
 import { CategoryService } from "../category.service";
 
@@ -9,16 +10,22 @@ import { CategoryService } from "../category.service";
 })
 export class SaveCategoryComponent implements OnInit{
 
-    title = "Cadastrar";
+    title = "";
 
     formSave: FormGroup;
 
     showErro:boolean = false;
+    messageErro: string = "";
+
     showSuccess:boolean = false;
+    messageSuccess: string = "";
+
+    private id: number;
 
     constructor(
         private formBuilder: FormBuilder,
-        private categoryService: CategoryService
+        private categoryService: CategoryService,
+        private route: ActivatedRoute
     ){}
 
     ngOnInit(): void {
@@ -28,6 +35,34 @@ export class SaveCategoryComponent implements OnInit{
             description: ['',[Validators.required,Validators.maxLength(150)]],
             observation: ['',[Validators.maxLength(255)]]
         });
+
+        this.route.params.subscribe(
+            params => {
+                this.id = params.id;
+
+                if(this.id == undefined){
+                    this.title = "Cadastrar";
+
+                }else{
+                    this.title = "Alterar";
+
+                    this.categoryService.findById(this.id).subscribe(
+                        category => {
+                            this.setValueField(category);
+                        }
+                    );
+
+                }
+            }
+        );
+
+    }
+
+    private setValueField(category: Category){
+        this.formSave.get('id').setValue(category.id);
+        this.formSave.get('name').setValue(category.name);
+        this.formSave.get('description').setValue(category.description);
+        this.formSave.get('observation').setValue(category.observation);
     }
 
     getCaracteresField(field: string): number{
@@ -41,19 +76,42 @@ export class SaveCategoryComponent implements OnInit{
 
     send(){
         let category = this.formSave.getRawValue() as Category;
-        
-        this.categoryService.save(category).subscribe(
-            resp => {
-                console.log(resp);
-                this.showSuccess = true;
-                this.formSave.reset();
-            },
-            error => {
-                console.log(error);
-                this.showErro = true;
-                this.formSave.reset();
-            }
-        );
+
+        if(this.id == undefined){ //adicionar
+
+            this.categoryService.save(category).subscribe(
+                resp => {
+                    console.log(resp);
+                    this.showSuccess = true;
+                    this.messageSuccess = "Categoria cadastra com sucesso!";
+                    this.formSave.reset();
+                },
+                error => {
+                    console.log(error);
+                    this.showErro = true;
+                    this.messageErro = "Erro ao cadastrar categoria!";
+                    this.formSave.reset();
+                }
+            );
+
+        }else{ //atualizar
+
+            this.categoryService.update(category).subscribe(
+                resp => { 
+                    console.log(resp);
+                    this.showSuccess = true;
+                    this.messageSuccess = "Categoria atualizada com sucesso!";
+                    this.formSave.reset();
+                },
+                err => {
+                    console.log(err);
+                    this.showErro = true;
+                    this.messageErro = "Erro ao atualizar categoria!";
+                    this.formSave.reset();
+                }
+            );
+
+        }
         
     }
 
