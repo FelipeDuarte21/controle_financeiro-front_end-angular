@@ -19,6 +19,7 @@ export class LoginGuardService implements CanActivate{
             this.authService.getUser().subscribe(
                 user => {
                     this.loginService.redirectUser(user);
+                    return false;
                 }
             );
 
