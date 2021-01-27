@@ -51,15 +51,20 @@ export class HomeCategoryComponent implements OnInit{
         let route = "";
 
         switch(btn){
+            case 1: 
+                route = `/entry`
+                break;
             case 0:
             case 2:
                 route = `category/save`;
                 break;
             case 3:
                 route = 'category/delete'
+                break;
         }
 
         switch(btn){
+            case 1:
             case 2:
             case 3:
                 this.router.navigate([route,this.ids[0]]);

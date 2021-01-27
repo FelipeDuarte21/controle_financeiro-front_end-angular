@@ -3,6 +3,7 @@ export interface Category{
     name: string
     description: string
     observation:string
+    balance: number
 }
 
 export interface CategoryPage{

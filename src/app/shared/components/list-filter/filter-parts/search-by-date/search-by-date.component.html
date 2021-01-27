@@ -1,0 +1,5 @@
+<form [formGroup]="formSearchDate" class="form-inline" (submit)="send()">
+    De: <input type="date" formControlName="start" class="form-control form-control-sm mx-1">
+    até: <input type="date" formControlName="end" class="form-control form-control-sm mx-2">
+    <button [disabled]="formSearchDate.invalid" type="submit" class="btn btn-outline-primary btn-sm"><i class="fa fa-search"></i>Buscar</button>
+</form>

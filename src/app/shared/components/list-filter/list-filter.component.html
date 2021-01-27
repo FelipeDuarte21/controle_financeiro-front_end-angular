@@ -1,4 +1,4 @@
-<div class="mt-5">              
+<div class="mt-5" *ngIf="!showSearchByDate">              
     <div class="row justify-content-between">
         
         <div class="col-12 col-md-4">
@@ -16,4 +16,28 @@
         </div>
         
     </div>
-</div>
+</div> 
+
+<div class="mt-5" *ngIf="showSearchByDate">              
+    <div class="row justify-content-between">
+        
+         <div class="col-12 col-md-3">
+            <search-by-name (eventSearch)="onEventSearch($event)"></search-by-name>
+        </div>  
+
+        <div class="col-12 col-md-5">
+            <search-by-date (eventSearchByDate)="onEventSearchByDate($event)"></search-by-date>
+        </div>
+      
+        <div class="col-12 col-md-2 mt-3 mt-md-0 text-center">
+            <pagination [totalPages]="totalPages" [currentPage]="currentPage" 
+                (eventPage)="onEventPage($event)"></pagination>
+        </div>
+        
+        <div class="col-12 col-md-2 mt-3 mt-md-0">
+            <select-quantity [options]="options" class="float-md-right" 
+                (eventSelectQuantity)="onEventSelectQuantity($event)"></select-quantity>
+        </div>
+        
+    </div>
+</div> 
