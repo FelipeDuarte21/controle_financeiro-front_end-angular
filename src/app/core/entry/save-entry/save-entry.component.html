@@ -1,0 +1,96 @@
+<div class="container-fluid">
+
+    <div class="row justify-content-center">
+
+        <div class="col-12 col-md-10 mb-3">
+
+            <h4 class="text-center mt-5">{{title}} Lançamento</h4>
+
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+
+                    <!--Botões-->
+                    <div class="my-5">
+                        <a [routerLink]="['/entry',categoryId]" class="btn btn-info"><i class="fa fa-chevron-circle-left mr-1"></i>Voltar</a>
+                    </div>
+
+                    <!--Formulário-->
+                    <form [formGroup]="formSave" (submit)="send()">
+
+                        <div class="alert alert-danger text-center" *ngIf="showErro">{{message}}</div>
+
+                        <div class="alert alert-success text-center" *ngIf="showSuccess">{{message}}</div>
+
+                        <input type="hidden" formControlName="id" value="null">
+
+                        <div class="form-group mb-4">
+                            <label for="name-entry" class="mb-0">Nome:</label>
+
+                            <valid-field [form]="formSave" field="name" idField="name-entry">
+                                <input type="text" formControlName="name" id="name-entry" class="form-control">
+                                <p class="float-right text-muted">{{getCaracteresField('name')}}/50</p>
+                            </valid-field>
+                            
+                        </div>
+
+                        <div class="form-group mb-5">
+                            <label for="description-entry" class="mb-0">Descrição:</label>
+
+                            <valid-field [form]="formSave" field="description" idField="description-entry">
+                                <input type="text" formControlName="description" id="description-entry" class="form-control">
+                                <p class="float-right text-muted">{{getCaracteresField('description')}}/150</p>
+                            </valid-field>
+                            
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-12 col-md-4">
+                                <div class="form-group">
+                                    <label for="value-entry" class="mb-0">Valor:</label>
+
+                                    <valid-field [form]="formSave" field="value" idField="value-entry">
+                                        <input type="number" min="0" step="0.01" formControlName="value" id="value-entry" class="form-control">
+                                    </valid-field>
+                                    
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-4">
+                                <div class="form-group">
+                                    <label for="date-entry" class="mb-0">Data:</label>
+
+                                    <valid-field [form]="formSave" field="date" idField="date-entry">
+                                        <input type="date" class="form-control" id="date-entry" formControlName="date">
+                                    </valid-field>
+                                    
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-4">
+                                <div class="form-group">
+                                    <label for="entryType-entry" class="mb-0">Tipo:</label>
+
+                                    <valid-field [form]="formSave" field="entryType" idField="entryType-entry">
+                                        <select class="form-control" id="entryType-entry" formControlName="entryType">
+                                            <option value="0">Provento</option>
+                                            <option value="1">Despesa</option>
+                                        </select>
+                                    </valid-field>
+                                    
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <button [disabled]="formSave.invalid" type="submit" class="btn btn-success mt-3"><i class="fa fa-save mr-1"></i>Salvar</button>
+
+                    </form>
+                </div>
+            </div>
+           
+        </div>
+
+    </div>
+
+</div>

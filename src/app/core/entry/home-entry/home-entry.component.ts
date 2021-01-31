@@ -25,7 +25,8 @@ export class HomeEntryComponent implements OnInit{
     ngOnInit(): void {
         this.activatedRoute.params.subscribe(
             params => {
-                this.categoryId = params.id;
+                this.categoryId = params.categoryId;
+                window.sessionStorage.setItem('categoryId', this.categoryId.toString());
             }
         );
 
@@ -48,6 +49,9 @@ export class HomeEntryComponent implements OnInit{
         switch(btn){
             case 0:
                 route = "/category";
+                break;
+            case 1:
+                route = `entry/${this.categoryId}/save`;
                 break;
         }
 
