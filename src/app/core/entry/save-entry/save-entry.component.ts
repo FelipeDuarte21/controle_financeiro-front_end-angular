@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { ActivatedRoute } from "@angular/router";
 import { Entry } from "../entry.model";
 import { EntryService } from "../entry.service";
 
@@ -21,11 +22,17 @@ export class SaveEntryComponenet implements OnInit{
 
     constructor(
         private formBuilder: FormBuilder,
-        private entryService: EntryService
+        private entryService: EntryService,
+        private activatedRoute: ActivatedRoute
     ){}
 
     ngOnInit(): void {
-        this.categoryId = parseInt(window.sessionStorage.getItem('categoryId'));
+        
+        this.activatedRoute.queryParams.subscribe(
+            queryParams => {
+                this.categoryId = queryParams.categoryId;
+            }
+        );
 
         this.formSave = this.formBuilder.group({
             id: [''],

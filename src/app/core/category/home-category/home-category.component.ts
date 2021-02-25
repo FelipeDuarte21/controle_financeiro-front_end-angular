@@ -65,6 +65,8 @@ export class HomeCategoryComponent implements OnInit{
 
         switch(btn){
             case 1:
+                this.router.navigate([route],{queryParams: {categoryId: this.ids[0]}});
+                break;
             case 2:
             case 3:
                 this.router.navigate([route,this.ids[0]]);

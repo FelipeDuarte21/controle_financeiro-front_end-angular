@@ -3,7 +3,10 @@
     <div class="col-12">
         <p class="mb-0"><span class="font-weight-bold">Categoria: </span>{{category.name}}</p>
         <p class="mb-0"><span class="font-weight-bold">Descrição: </span>{{category.description}}</p>
-        <p class="mb-0"><span class="font-weight-bold">Saldo: </span> <span class="text-primary">{{category.balance | currency: 'BRL':'symbol'}}</span></p>
+        <p class="mb-0"><span class="font-weight-bold">Saldo: </span>
+            <span [ngClass]="{'text-primary': category.balance > 0, 'text-danger': category.balance < 0}">
+                {{category.balance | currency: 'BRL':'symbol'}}</span> 
+        </p>
         <p class="text-justify mt-0 mb-0"><span class="font-weight-bold">Observações: </span>{{category.observation}}</p>
     </div>
     

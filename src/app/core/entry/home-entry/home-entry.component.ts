@@ -23,10 +23,9 @@ export class HomeEntryComponent implements OnInit{
     ){}
 
     ngOnInit(): void {
-        this.activatedRoute.params.subscribe(
-            params => {
-                this.categoryId = params.categoryId;
-                window.sessionStorage.setItem('categoryId', this.categoryId.toString());
+        this.activatedRoute.queryParams.subscribe(
+            queryParams => {
+                this.categoryId = queryParams.categoryId;
             }
         );
 
@@ -51,11 +50,16 @@ export class HomeEntryComponent implements OnInit{
                 route = "/category";
                 break;
             case 1:
-                route = `entry/${this.categoryId}/save`;
+                route = `entry/save`;
                 break;
         }
 
-        this.router.navigate([route]);
+        if(btn == 1){
+            this.router.navigate([route],{queryParams: {categoryId: this.categoryId}});
+        }else{
+            this.router.navigate([route]);
+        }
+        
     }
 
 }

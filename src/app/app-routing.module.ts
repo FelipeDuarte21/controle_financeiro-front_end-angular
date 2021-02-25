@@ -16,7 +16,7 @@ const routes: Routes = [
         loadChildren: ()=>import('./core/category/category.module').then(m => m.CategoryModule)
     },
     {
-        path: 'entry/:categoryId',
+        path: 'entry',
         loadChildren: ()=>import('./core/entry/entry.module').then(m => m.EntryModule)
     }
 ];
