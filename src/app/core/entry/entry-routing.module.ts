@@ -13,8 +13,12 @@ const routes: Routes = [
                 path: '',
                 component: HomeEntryComponent
             },
-            {
+            { //Cadastrar
                 path: 'save',
+                component: SaveEntryComponenet
+            },
+            { //Atualizar
+                path: 'save/:entryId',
                 component: SaveEntryComponenet
             }
         ]

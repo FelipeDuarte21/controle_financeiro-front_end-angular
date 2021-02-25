@@ -31,14 +31,20 @@ export class HomeEntryComponent implements OnInit{
 
         this.buttons = [
             {id: 0,btnName: "Voltar",btnClas: "btn-info",visible: true,nature: null,iconClass: "fa-chevron-circle-left"},
-            {id: 1,btnName: "Lançar",btnClas: "btn-info",visible: true,nature: null,iconClass: "fa-plus"},
-            {id: 2,btnName: "Alterar",btnClas: "btn-info",visible: false,nature: ButtonBuilderNatureEnum.SINGLE,iconClass: "fa-edit"},
-            {id: 3,btnName: "Excluir",btnClas: "btn-danger",visible: false,nature: ButtonBuilderNatureEnum.SINGLE,iconClass: "fa-trash"}
+            {id: 1,btnName: "Lançar",btnClas: "btn-info",visible: true,nature: null,iconClass: "fa-plus"}
         ];
     }
 
     onEventClickButton(btn: number){
         this.redirect(btn);
+    }
+
+    editLine(id:number){
+        this.router.navigate(['entry/save',id],{queryParams: {categoryId: this.categoryId}});
+    }
+    
+    deleteLine(id: number){
+        console.log(id);
     }
 
     private redirect(btn: number){

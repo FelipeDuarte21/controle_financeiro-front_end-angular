@@ -11,10 +11,10 @@
             <button-builder [buttons]="buttons" [showMultiple]="showMultiple" [showSingle]="showSingle"
                 (eventClick)="onEventClickButton($event)"></button-builder>
 
-            <list-entry [categoryId]="categoryId"></list-entry>
+            <list-entry [categoryId]="categoryId" (edit)="editLine($event)" (delete)="deleteLine($event)"></list-entry>
 
         </div>
 
     </div>
 
-</div>
+</div> 

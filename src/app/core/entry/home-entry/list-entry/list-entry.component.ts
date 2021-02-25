@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { Component, Input, Output, EventEmitter } from "@angular/core";
 import { SearchByDateModel } from "src/app/shared/components/list-filter/filter-parts/search-by-date/search-by-date.model";
 import { Entry } from "../../entry.model";
 import { EntryService } from "../../entry.service";
@@ -21,11 +21,9 @@ export class ListEntryComponent{
     private name: string = null;
 
     options: Array<string> = ['5','10','20','30','50'];
-    
-    //@Output() eventClickCard = new EventEmitter<any>();
 
-    //private countCardSelected:number = 0;
-    //private idsCardSelected: Array<number> = [];
+    @Output() edit = new EventEmitter<number>();
+    @Output() delete = new EventEmitter<number>();
 
     constructor(
         private entryService: EntryService
@@ -55,41 +53,6 @@ export class ListEntryComponent{
             }
         );
     }
-
-    /*
-    onEventClickCard(id: number){
-
-        let cardSelected = true;
-
-        let card = document.querySelector(`#card-${id}`);
-
-        if(card.classList.contains('card-selected')){
-            card.classList.remove('card-selected');
-            
-            cardSelected = false;
-            
-            this.countCardSelected--;
-
-            let index = this.idsCardSelected.indexOf(id);
-            this.idsCardSelected.splice(index,1);
-
-        }else{
-            card.classList.add('card-selected');
-
-            cardSelected = true;
-            
-            this.countCardSelected++;
-            
-            this.idsCardSelected.push(id);
-        }
-
-        let selecteds = {
-            count: this.countCardSelected,
-            ids: this.idsCardSelected
-        }
-        
-        return this.eventClickCard.emit(selecteds);
-    }*/
 
     onEventPage(page: number){
         this.currentState(page,this.size);
@@ -128,9 +91,17 @@ export class ListEntryComponent{
         }
     }
 
-    /*
-    builderId(id: number):string{
-        return `card-${id}`;
-    }*/
+    selectedLine(id: number, action: string){
+
+        if(action == 'editar'){
+            this.edit.emit(id);
+        }
+
+        if(action === 'excluir'){
+            this.delete.emit(id);
+        }
+
+    }
+    
 
 }

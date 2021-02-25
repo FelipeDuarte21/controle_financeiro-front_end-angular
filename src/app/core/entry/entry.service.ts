@@ -18,6 +18,14 @@ export class EntryService{
         return this.http.post<Entry>(this.route,entry);
     }
 
+    update(entry: Entry): Observable<Entry>{
+        return this.http.put<Entry>(this.route,entry);
+    }
+
+    findById(id: number): Observable<Entry>{
+        return this.http.get<Entry>(`${this.route}/${id}`);
+    }
+
     findByName(categoryId: number, name:string, page:number,size:number):Observable<EntryPage>{
         return this.http.get<EntryPage>(`${this.route}/category/${categoryId}/search?name=${name}&number=${page}&size=${size}`);
     }

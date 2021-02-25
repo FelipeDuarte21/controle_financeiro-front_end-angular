@@ -12,6 +12,8 @@ export class SaveEntryComponenet implements OnInit{
     
     categoryId: number;
 
+    entryId: number;
+
     title:string = "Cadastrar";
 
     formSave: FormGroup;
@@ -27,6 +29,25 @@ export class SaveEntryComponenet implements OnInit{
     ){}
 
     ngOnInit(): void {
+
+        this.activatedRoute.params.subscribe(
+            params => {
+                this.entryId = params.entryId;
+
+                if(this.entryId == undefined){
+                    this.title = "Cadastrar";
+                }else{
+                    this.title = "Alterar";
+                }
+
+                this.entryService.findById(this.entryId).subscribe(
+                    entry => {
+                        this.setValueField(entry);
+                    }
+                );
+
+            }
+        );
         
         this.activatedRoute.queryParams.subscribe(
             queryParams => {
@@ -45,6 +66,15 @@ export class SaveEntryComponenet implements OnInit{
         
     }
 
+    private setValueField(entry: Entry){
+        this.formSave.get('id').setValue(entry.id);
+        this.formSave.get('name').setValue(entry.name);
+        this.formSave.get('description').setValue(entry.description);
+        this.formSave.get('value').setValue(entry.value);
+        this.formSave.get('date').setValue(entry.date);
+        this.formSave.get('entryType').setValue(entry.entryType);
+    }
+
     getCaracteresField(field: string): number{
         if(this.formSave.get(field).value){
             let value = this.formSave.get(field).value as string;
@@ -60,20 +90,41 @@ export class SaveEntryComponenet implements OnInit{
         let entry = this.formSave.getRawValue() as Entry;
         entry.categoryId = this.categoryId;
 
-        this.entryService.save(entry).subscribe(
-            respEntry =>{
-                console.log(respEntry);
-                this.showSuccess = true;
-                this.message = "Lançamento realizado com sucesso!";
-                this.formSave.reset();
-            },
-            err => {
-                console.log(err);
-                this.showErro = true;
-                this.message = "Erro ao realizar Lançamento!";
-                this.formSave.reset();
-            }
-        );
+        if(entry.id){ //Atualizar
+
+            this.entryService.update(entry).subscribe(
+                respEntry =>{
+                    console.log(respEntry);
+                    this.showSuccess = true;
+                    this.message = "Lançamento alterado com sucesso!";
+                    this.formSave.reset();
+                },
+                err => {
+                    console.log(err);
+                    this.showErro = true;
+                    this.message = "Erro ao alterar Lançamento!";
+                    this.formSave.reset();
+                }
+            )
+
+        }else{ //Cadastrar
+
+            this.entryService.save(entry).subscribe(
+                respEntry =>{
+                    console.log(respEntry);
+                    this.showSuccess = true;
+                    this.message = "Lançamento realizado com sucesso!";
+                    this.formSave.reset();
+                },
+                err => {
+                    console.log(err);
+                    this.showErro = true;
+                    this.message = "Erro ao realizar Lançamento!";
+                    this.formSave.reset();
+                }
+            );
+
+        }  
         
     }
 
